@@ -158,32 +158,52 @@ ALTER TABLE Bandara DROP PRIMARY KEY;
 ALTER TABLE Bandara ADD PRIMARY KEY (ID, Kode_IATA);
 
 ALTER TABLE Bandara_Penerbangan 
-ADD CONSTRAINT FK_Bandara 
-FOREIGN KEY (Bandara_ID) 
-REFERENCES Bandara(ID) 
+ADD CONSTRAINT FK_Bandara FOREIGN KEY (Bandara_ID) REFERENCES Bandara(ID) 
 ON DELETE CASCADE 
 ON UPDATE CASCADE;
 
 ALTER TABLE Penumpang DROP COLUMN Email;
 
-UPDATE Penerbangan SET  Waktu_keberangkatan = '2024-12-15 11:00:00',  Waktu_sampai = '2024-12-15 13:30:00' WHERE ID = 'FL0001';
+UPDATE Penerbangan 
+SET  Waktu_keberangkatan = '2024-12-15 11:00:00',  Waktu_sampai = '2024-12-15 13:30:00'
+WHERE ID = 'FL0001';
 
-UPDATE Penumpang SET No_Telepon = '081223344556' WHERE NIK = '3302134567890123' AND Nama = 'Siti Aminah';
+UPDATE Penumpang 
+  SET No_Telepon = '081223344556' 
+  WHERE NIK = '3302134567890123' 
+  AND Nama = 'Siti Aminah';
 
-UPDATE Pesawat SET Status_Pesawat = 'Aktif' WHERE ID = 'PKGHI3';
+UPDATE Pesawat 
+  SET Status_Pesawat = 'Aktif' 
+  WHERE ID = 'PKGHI3';
 
-ALTER TABLE Tiket DROP CONSTRAINT FK_Penumpang;
+ALTER TABLE Tiket 
+  DROP CONSTRAINT FK_Penumpang;
 
-DELETE FROM Tiket WHERE Penumpang_NIK = '3504156789012345' AND Penerbangan_ID = 'FL0004';
+DELETE FROM Tiket 
+  WHERE Penumpang_NIK = '3504156789012345' 
+  AND Penerbangan_ID = 'FL0004';
 
-ALTER TABLE Tiket ADD CONSTRAINT FK_Penumpang  FOREIGN KEY (Penumpang_NIK) REFERENCES Penumpang(NIK);
+ALTER TABLE Tiket 
+  ADD CONSTRAINT FK_Penumpang  
+  FOREIGN KEY (Penumpang_NIK) REFERENCES Penumpang(NIK);
 
-ALTER TABLE Penumpang DROP CONSTRAINT FK_Bagasi;
+ALTER TABLE Penumpang 
+  DROP CONSTRAINT FK_Bagasi;
 
-DELETE FROM Bagasi   WHERE ID = '2'   AND Berat = '15'   AND Ukuran = 'S'   AND Warna = 'Merah';
+DELETE FROM Bagasi   
+  WHERE ID = '2'   
+  AND Berat = '15'   
+  AND Ukuran = 'S'   
+  AND Warna = 'Merah';
 
-ALTER TABLE Penumpang ADD CONSTRAINT FK_Bagasi FOREIGN KEY (Bagasi_ID) REFERENCES Bagasi(ID) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE Penumpang 
+  ADD CONSTRAINT FK_Bagasi 
+  FOREIGN KEY (Bagasi_ID) REFERENCES Bagasi(ID) 
+  ON DELETE CASCADE 
+  ON UPDATE CASCADE;
 
 SET SQL_SAFE_UPDATES = 0;
 
-DELETE FROM Penerbangan WHERE Status_penerbangan = 'Ditunda';
+DELETE FROM Penerbangan 
+  WHERE Status_penerbangan = 'Ditunda';

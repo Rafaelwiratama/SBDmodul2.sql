@@ -1,3 +1,6 @@
+create database bandara_horizon_air;
+use bandara_horizon_air;
+
 create table Bandara( 
 ID INT PRIMARY KEY, 
 Nama varchar(255), 
